@@ -1,6 +1,6 @@
 # Advanced-Snake-Game
 Um jogo feito em html utilizando o Canvas.
-Este código foi baseado inicialmente em um outro código,  gostaria de agradecer ao [Straker](https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4)
+Este código foi baseado inicialmente em um [outro código](https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4),  gostaria de agradecer ao [Steven Lambert](https://gist.github.com/straker)
 por isso. 
 
 
