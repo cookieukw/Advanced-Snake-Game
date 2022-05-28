@@ -1,14 +1,99 @@
 html, body {
-    height: 100%;
-    margin: 0;
+    margin: 0px;
+    text-align: center;
+    padding: 0;
+    background: black;
   }
+  
+*{
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none; /*Safari */
+  -webkit-user-select: none; /*Chrome*/     
+  -moz-user-select: none; /*Firefox*/
+  -ms-user-select: none; /*Internet Explorer/Edge*/
+  user-select: none;
+
+-webkit-tap-highlight-color: transparent;
+
+}
 
   body {
+    width: 100%;
+    height: auto;
     background: black;
-    display: flex;
+  }
+  
+  .controls{
+    margin: auto;
     align-items: center;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    padding: 0;
+    background: white;
+    width: 34vh;
+    height: 34vh;
+    margin-top: 7vh;
+    border-radius: 3vh;
+    } 
+    
+  #game {
+    border: 0.1vh solid white;
+    width: 70%;
+    height: 70%;
+    /*border-radius: 3vh;*/
+    margin-left: 5vh;
+    margin-right: 5vh;
+    margin-top: 8vh;
   }
-  canvas {
-    border: 1px solid white;
+  
+  .ctrl_btn {
+    border-radius: 3vh;
+    border: 0;
+    padding: 3vh;
+    background: red;
+    cursor: pointer;
+    width: 9vh;
+    height: 9vh;
+    margin:0;
+    font-size: 3vh;
+    color: #FFFFFF;
+    text-align: center;
+    display: block ;
+     outline:0; 
+  border:none;
+  transition:all .3s ease-out; 
+  box-shadow:inset 0 -8px 0 0 rgba(0,0,0,.2)
+}
+
+.ctrl_btn:hover{
+  box-shadow:inset 0 -8px 0 0 rgba(0,0,0,.2)
   }
+  .ctrl_btn:active{
+    box-shadow:inset 0 0px 0 0 rgba(0,0,0,.2)
+  }
+.btn_center {
+  margin: 1vh;
+}
+
+.center_btn {
+  justify-content: center;
+  display: flex;
+}
+#btn_0 {
+  background: transparent;
+  cursor: none;
+  width: 9vh;
+    height: 9vh;
+    border: none;
+}
+
+
+.scores {
+  z-index: 1;
+  margin-top: 30;
+  color: white;
+}
