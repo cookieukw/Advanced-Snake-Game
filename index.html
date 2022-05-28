@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Basic Snake HTML Game</title>
   <meta charset="UTF-8">
-<link rel="stylesheet" href="styles.css"
-</head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta
+  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+
+  <title>SnakeGame</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>  
+
 <body>
-<canvas width="400" height="400" id="game"></canvas>
-<script src="main.js"></script>
+  <h1 class="scores" id="score">Score: 0</h1>
+  
+  <canvas width="400" height="400" id="game"></canvas>
+  
+ <div class="controls">
+    <button
+    class="ctrl_btn"
+    id="cima">⇧</button>
+    <div class="center_btn">
+      <button class="ctrl_btn" id="esquerda">⇦</button>
+       <button  id="btn_0"></button>
+      <button class="ctrl_btn" id="direita">⇨</button>
+    </div>
+       <button class="ctrl_btn" id="baixo">⇩️</button>
+  </div>
+  
+   <script src="functions.js" defer></script>
+     <script src="controls.js" defer></script>
+  <script src="main.js" defer></script>
+
 </body>
 </html>
