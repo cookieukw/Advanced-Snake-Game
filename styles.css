@@ -97,3 +97,8 @@ html, body {
   margin-top: 30;
   color: white;
 }
+
+#text{
+  font-size: 4vh;
+  color: #FFFFFF;
+}
