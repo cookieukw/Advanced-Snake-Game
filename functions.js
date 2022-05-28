@@ -1,3 +1,8 @@
+if(!canvasSupport()){
+  alert("Seu navegador não suporta o Canvas!")
+  clearScreen()
+  window.stop()
+}
 const canvas = document.getElementById('game');
 const cookie = canvas.getContext('2d');
 const block = 16;
@@ -264,4 +269,25 @@ function drawTextScore(){
 function getRandomDirection() {
   const keys = Object.keys(direction)
   return direction[keys[Math.floor(Math.random()*keys.length)]]
+}
+
+function canvasSupport(){
+  var c = document.createElement('canvas');
+  return (c.getContext && c.getContext('2d'));
+  
+}
+
+function clearScreen(){
+  const el = document.getElementById("score");
+  
+  while (el.firstChild) {
+    el.removeChild(el.lastChild);
+    
+  }
+  var paragrafo = document.createElement("p");
+  
+  var texto = document.createTextNode(" Seu navegador não suporta o Canvas :(");
+  paragrafo.appendChild(texto);
+  paragrafo.setAttribute('id','txt');
+  document.body.appendChild(paragrafo);
 }
