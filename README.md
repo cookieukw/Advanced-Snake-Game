@@ -18,6 +18,6 @@ Ela spawna do outro lado independentemente do tamanho do canvas ou do bloco<p>
 - Melhor organização dos códigos e variáveis <p>
 <p>
   <p>
-    [DEMO](https://cookieukw.github.io/Advanced-Snake-Game/)
+    [DEMO](https://cookieukw.github.io/Advanced-Snake-Game)
     <p>
   ![example](https://user-images.githubusercontent.com/65344982/170846061-c1b9ad7e-4b56-46cc-9909-b4ae303b2081.png)
