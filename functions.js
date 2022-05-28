@@ -1,143 +1,267 @@
-var canvas = document.getElementById('game');
-var context = canvas.getContext('2d');
+const canvas = document.getElementById('game');
+const cookie = canvas.getContext('2d');
+const block = 16;
+const scoreConfig = {
+drawInCanvas: true,
+textColor: "white",
+font: "4vh Arial",
+text: "Score: "
+}
 
-// the canvas width & height needs to be a multiple of the grid size in order for collision detection to work
-// (e.g. 16 * 25 = 400)
-var grid = 16;
-var count = 0;
+var direction = {
+  up: {
+    x: 0,
+    y: -block
+  },
+  down: {
+    x: 0,
+    y: block 
+  },
+  left:{
+    x: -block,
+    y: 0
+  },
+  right: {
+    x: block,
+    y: 0
+  }
+}
+
+const array_y = montarCanvas(canvas.height);
+var array_x = montarCanvas(canvas.width);
+
+const randomDirection = getRandomDirection();
+
 
 var snake = {
-  x: 160,
-  y: 160,
-
-  // snake velocity. moves one grid length every frame in either the x or y direction
-  dx: grid,
-  dy: 0,
-
-  // keep track of all grids the snake body occupies
+  
+  directX: randomDirection.x,
+  directY: randomDirection.y,
   cells: [],
+  cellsSize: 1,
+  posX: array_x[Math.floor(Math.random()*array_x.length)],
+  
+  posY: array_y[Math.floor(Math.random()*array_y.length)],
+  velocity: 20
+}
 
-  // length of the snake. grows when eating an apple
-  maxCells: 4
-};
+
 var apple = {
-  x: 320,
-  y: 320
-};
+  
+  posY: array_y[Math.floor(Math.random()*array_y.length)],
+  
+  posX: array_x[Math.floor(Math.random()*array_x.length)],
+  
+  color: 'white'
+  
+}
 
-// get random whole numbers in a specific range
-// @see https://stackoverflow.com/a/1527820/2124254
-function getRandomInt(min, max) {
+var env_apple = {
+  posY: array_y[Math.floor(Math.random()*array_y.length)],
+  
+  posX: array_x[Math.floor(Math.random()*array_x.length)],
+  color: 'red'
+}
+
+var fps = 0;
+const fpsMax = 10;
+var check_velocity = 0;
+
+
+  function getRange(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// game loop
-function loop() {
-  requestAnimationFrame(loop);
+ function getPercentFromValue(init, end) { return (100 * init) / end;
+} 
 
-  // slow game loop to 15 fps instead of 60 (60/15 = 4)
-  if (++count < 4) {
-    return;
-  }
-
-  count = 0;
-  context.clearRect(0,0,canvas.width,canvas.height);
-
-  // move snake by it's velocity
-  snake.x += snake.dx;
-  snake.y += snake.dy;
-
-  // wrap snake position horizontally on edge of screen
-  if (snake.x < 0) {
-    snake.x = canvas.width - grid;
-  }
-  else if (snake.x >= canvas.width) {
-    snake.x = 0;
-  }
-
-  // wrap snake position vertically on edge of screen
-  if (snake.y < 0) {
-    snake.y = canvas.height - grid;
-  }
-  else if (snake.y >= canvas.height) {
-    snake.y = 0;
-  }
-
-  // keep track of where snake has been. front of the array is always the head
-  snake.cells.unshift({x: snake.x, y: snake.y});
-
-  // remove cells as we move away from them
-  if (snake.cells.length > snake.maxCells) {
-    snake.cells.pop();
-  }
-
-  // draw apple
-  context.fillStyle = 'red';
-  context.fillRect(apple.x, apple.y, grid-1, grid-1);
-
-  // draw snake one cell at a time
-  context.fillStyle = 'green';
-  snake.cells.forEach(function(cell, index) {
-
-    // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
-    context.fillRect(cell.x, cell.y, grid-1, grid-1);
-
-    // snake ate apple
-    if (cell.x === apple.x && cell.y === apple.y) {
-      snake.maxCells++;
-
-      // canvas is 400x400 which is 25x25 grids
-      apple.x = getRandomInt(0, 25) * grid;
-      apple.y = getRandomInt(0, 25) * grid;
-    }
-
-    // check collision with all cells after this one (modified bubble sort)
-    for (var i = index + 1; i < snake.cells.length; i++) {
-
-      // snake occupies same space as a body part. reset game
-      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-        snake.x = 160;
-        snake.y = 160;
-        snake.cells = [];
-        snake.maxCells = 4;
-        snake.dx = grid;
-        snake.dy = 0;
-
-        apple.x = getRandomInt(0, 25) * grid;
-        apple.y = getRandomInt(0, 25) * grid;
-      }
-    }
-  });
+function getValueFromPercent(value, perc){
+  return value * (perc/100)
 }
 
-// listen to keyboard events to move the snake
-document.addEventListener('keydown', function(e) {
-  // prevent snake from backtracking on itself by checking that it's
-  // not already moving on the same axis (pressing left while moving
-  // left won't do anything, and pressing right while moving left
-  // shouldn't let you collide with your own body)
+function isOdd(numero){
+  return (numero % 2);
+}
 
-  // left arrow key
-  if (e.which === 37 && snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  }
-  // up arrow key
-  else if (e.which === 38 && snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  }
-  // right arrow key
-  else if (e.which === 39 && snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  }
-  // down arrow key
-  else if (e.which === 40 && snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
-});
 
-// start the game
-requestAnimationFrame(loop);
+function montarCanvas(csize){
+  var number = Math.floor(csize/16);
+
+var value = 0;
+var array = []
+
+for(var i = 0; i < number; i++){
+	if(i == 0){
+	array.push(0)
+	} else { 
+	value += 16
+	array.push(value)
+	}
+	
+	}
+return array;
+}
+
+function getRandom(value) {
+  var n = Math.floor(Math.random()*value);
+  return n;
+}
+
+function log(m){
+  console.log(m)
+}
+
+
+function drawSnake(){
+  
+  if (++fps < fpsMax) {
+    return;
+  }
+  
+  fps = 0;
+  
+cookie.clearRect(0,0,canvas.width,canvas.height);
+
+drawScore(scoreConfig.drawInCanvas)
+drawTextScore()
+
+  snake.posX += snake.directX 
+  snake.posY += snake.directY;
+  
+ const lastX = array_x[array_x.length-1];
+ const lastY = array_y[array_x.length-1];
+ 
+  if (snake.posX <= -block) {
+    
+    
+snake.posX = lastX
+  } 
+  else if (snake.posX >= lastX+block) {
+    snake.posX = -block;
+  }
+  
+  
+  if (snake.posY <= -block) {
+    snake.posY = lastY;
+    
+  }
+  else if (snake.posY >= lastY+block) {
+    snake.posY = -block;
+  }
+  
+  snake.cells.unshift({ posX: snake.posX, posY: snake.posY });
+
+  if (snake.cells.length > snake.cellsSize) {
+    snake.cells.pop();
+    
+  }
+ cookie.strokeStyle = '#f5a442';
+ cookie.lineWidth = 2;
+ 
+ cookie.strokeRect(snake.posX, snake.posY, block, block)
+
+    
+  drawApple()
+  drawEnvApple()
+  //snake.cells.forEach(function(cell, index) {
+for(var lop = 0; lop < snake.cells.length; lop++){
+  
+  var cell = snake.cells[lop]
+
+if(lop == 0){
+    cookie.fillStyle = '#f5a442'
+
+} else {
+  cookie.strokeStyle = 'black'
+    
+    
+  if(isOdd(lop)){
+  cookie.strokeStyle = '#bd0e02';
+  } else {
+  cookie.strokeStyle = "white"
+  }
+
+}   
+ cookie.strokeRect(cell.posX, cell.posY, block, block);
+    
+    if (cell.posX === apple.posX && cell.posY === apple.posY) {
+      
+      
+      snake.cellsSize++;
+      drawRandomApple();
+    }
+    
+    if (cell.posX == env_apple.posX && cell.posY == env_apple.posY) {
+      
+      drawRandomEnvApple();
+      
+      if(snake.velocity != 20){
+        velocity++
+        velocity++
+      }
+      if(snake.cells.length !=1){
+       snake.cells.pop();
+       snake.cellsSize -= 1
+    }
+
+    }
+  }//);
+  }
+
+
+function drawRandomApple(){
+  
+  apple.posX = array_x[Math.floor(Math.random()*array_x.length)]
+  
+  apple.posY = array_y[Math.floor(Math.random()*array_y.length)]
+  
+ cookie.fillStyle= apple.color;
+ 
+ cookie.fillRect(apple.posX, apple.posY, block, block);
+
+}
+
+function drawApple() {
+  
+cookie.fillStyle = apple.color;
+
+cookie.fillRect(apple.posX, apple.posY, block, block);
+}
+
+function drawEnvApple() {
+  
+cookie.fillStyle = env_apple.color;
+cookie.fillRect(env_apple.posX, env_apple.posY, block,block)
+}
+
+function drawRandomEnvApple(){
+  
+  env_apple.posX = array_x[Math.floor(Math.random()*array_x.length)]
+  
+  env_apple.posY = array_y[Math.floor(Math.random()*array_y.length)]
+  
+
+ cookie.fillStyle= env_apple.color;
+ cookie.fillRect(env_apple.posX, env_apple.posY, block, block);
+}
+
+function drawScore(isDrawScore){
+  if(!isDrawScore) return;
+  
+  cookie.fillStyle = scoreConfig.textColor;
+  
+  cookie.font = scoreConfig.font
+  cookie.fillText(scoreConfig.text+ (snake.cellsSize - 1), array_x[2], array_y[3]);
+  drawSnake()
+}
+
+function drawTextScore(){
+  
+  document.getElementById("score").innerHTML = scoreConfig.text+(snake.cellsSize-1)
+}
+
+
+function getRandomDirection() {
+  const keys = Object.keys(direction)
+  return direction[keys[Math.floor(Math.random()*keys.length)]]
+}
