@@ -16,6 +16,7 @@ Ela spawna do outro lado independentemente do tamanho do canvas ou do bloco<p>
 - A cobra spawna em um local aleatório e em uma direção aleatória<p>
 - Contagem de pontos<p>
 - Melhor organização dos códigos e variáveis <p>
+---
 [demo](https://cookieukw.github.io/Advanced-Snake-Game/)
- 
+---
   ![example](https://user-images.githubusercontent.com/65344982/170846061-c1b9ad7e-4b56-46cc-9909-b4ae303b2081.png)
