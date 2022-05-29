@@ -54,7 +54,7 @@ function setControls(){
     
  if (e.which === 40 && snake.directY === 0) {
    /*down/baixo*/
-    ssnake.directX = direction.down.x;
+    snake.directX = direction.down.x;
     snake.directY = direction.down.y;
  }
 
