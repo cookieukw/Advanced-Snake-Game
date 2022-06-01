@@ -9,7 +9,7 @@ if(isMobile()){
 document.getElementById('controls').remove()
   setControls()
   canvas.style.width = '85vh'
-  canvas.style.height = '85vh'
+  canvas.style.height = '80vh'
 }
 
 function game(){
