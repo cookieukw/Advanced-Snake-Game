@@ -3,6 +3,8 @@ if(!canvasSupport()){
   clearScreen()
   window.stop()
 }
+
+
 const canvas = document.getElementById('game');
 const cookie = canvas.getContext('2d');
 const block = 16;
@@ -290,4 +292,12 @@ function clearScreen(){
   paragrafo.appendChild(texto);
   paragrafo.setAttribute('id','txt');
   document.body.appendChild(paragrafo);
+}
+
+function isMobile(){
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+return true
+} else {
+return false;
+}
 }
