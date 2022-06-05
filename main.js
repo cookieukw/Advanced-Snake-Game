@@ -3,8 +3,8 @@
 if(isMobile()){
   setMobileControls()
 
-  canvas.style.width = '400px'
-  canvas.style.height = '400px'
+  canvas.style.width = '300px'
+  canvas.style.height = '300px'
 } else {
 document.getElementById('controls').remove()
   setControls()
