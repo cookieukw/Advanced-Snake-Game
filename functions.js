@@ -183,9 +183,12 @@ function drawRandomEnvApple() {
 	cookie.fillRect(env_apple.posX, env_apple.posY, block, block);
 }
 
-function drawScore(isDrawScore) {
-	if (!isDrawScore) return;
-	Android.setScore(snake.cellsSize - 1);
+function drawScore(isDrawScore){
+ if(!isDrawScore) return;
+ cookie.fillStyle = scoreConfig.textColor;
+ cookie.font = scoreConfig.font
+ cookie.fillText(scoreConfig.text+ (snake.cellsSize - 1), array_x[2], array_y[3]);
+ drawSnake()
 }
 
 function getRandomDirection() {
