@@ -1,20 +1,20 @@
 const cima = function() {
-  if (snake.directX == direction.down.x && !snake.isGhost) return
+  if (snake.directX == direction.down.x && snake.controlLock) return
   snake.directX = direction.up.x;
   snake.directY = direction.up.y;
 }
 const baixo = function() {
-  if (snake.directX == direction.up.x && !snake.isGhost) return
+  if (snake.directX == direction.up.x && snake.controlLock) return
   snake.directX = direction.down.x;
   snake.directY = direction.down.y
 }
 const esquerda = function() {
-  if (snake.directY == direction.left.y && !snake.isGhost) return
+  if (snake.directY == direction.left.y && snake.controlLock) return
   snake.directX = direction.left.x;
   snake.directY = direction.left.y;
 }
 const direita = function() {
-  if (snake.directY == direction.right.y && !snake.isGhost) return
+  if (snake.directY == direction.right.y && snake.controlLock) return
   snake.directX = direction.right.x;
   snake.directY = direction.right.y;
 }
