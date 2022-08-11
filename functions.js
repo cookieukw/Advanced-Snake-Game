@@ -184,8 +184,9 @@ function drawRandomEnvApple() {
 }
 
 function drawScore(isDrawScore) {
-	if (!isDrawScore) return;
-	Android.setScore(snake.cellsSize - 1);
+	
+	document.getElementById("score").innerHtml = "Score: "+(snake.cellsSize -1);
+if (!isDrawScore) return;
 }
 
 function getRandomDirection() {
