@@ -42,7 +42,7 @@ var snake = {
 	directX: randomDirection.x,
 	directY: randomDirection.y,
 	cells: [],
-	cellsSize: 30,
+	cellsSize: 1,
 	posX: array_x[Math.floor(Math.random() * array_x.length)],
 	posY: array_y[Math.floor(Math.random() * array_y.length)],
 	velocity: 20,
