@@ -1,4 +1,4 @@
-8if (!canvasSupport()) {
+if (!canvasSupport()) {
 	alert("Seu navegador não suporta o Canvas!")
 	clearScreen()
 	window.stop()
