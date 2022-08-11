@@ -1,4 +1,4 @@
-if (!canvasSupport()) {
+8if (!canvasSupport()) {
 	alert("Seu navegador não suporta o Canvas!")
 	clearScreen()
 	window.stop()
@@ -187,6 +187,10 @@ function drawScore(isDrawScore) {
 	
 	document.getElementById("score").innerText = "Score: "+(snake.cellsSize -1);
 if (!isDrawScore) return;
+cookie.fillStyle = scoreConfig.textColor;
+cookie.font = scoreConfig.font;
+cookie.fillText(scoreConfig.text+ (snake.cellsSize - 1), array_x[2], array_y[3]); 
+
 }
 
 function getRandomDirection() {
