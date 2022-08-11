@@ -185,7 +185,7 @@ function drawRandomEnvApple() {
 
 function drawScore(isDrawScore) {
 	
-	document.getElementById("score").innerHtml = "Score: "+(snake.cellsSize -1);
+	document.getElementById("score").innerText = "Score: "+(snake.cellsSize -1);
 if (!isDrawScore) return;
 }
 
