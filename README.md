@@ -24,3 +24,12 @@ This version has the following improvements:
 <p>
 note: translator's english
 
+<br>
+<br>
+<br>
+<samp>
+<h2 align="center"> Open Source </h2>
+<sub><a align="center">Copyright © 2022 CookieUkw.</a></sub> </p>
+ <a align="center"> MIT license</a></p>
+</p>
+</samp>
