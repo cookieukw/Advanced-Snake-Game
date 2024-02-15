@@ -17,7 +17,7 @@ This version has the following improvements:
 - Point count<p>
 - Better organization of codes and variables <p>
 ---
-[demo](https://cookieukw.github.io/Advanced-Snake-Game/)
+[demo](https://snake-ukw.vercel.app)
 ---
   ![sample](https://user-images.githubusercontent.com/65344982/170846061-c1b9ad7e-4b56-46cc-9909-b4ae303b2081.png)
 <p>
